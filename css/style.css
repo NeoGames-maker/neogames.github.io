@@ -1,0 +1,413 @@
+/* Подключаем шрифты */
+@font-face {
+  font-family: "Exo2-Medium";
+  src: url("../fonts/Exo2-Medium.ttf");
+}
+@font-face {
+  font-family: "Exo2-Bold";
+  src: url("../fonts/Exo2-Bold.ttf");
+}
+
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Для правильного расчета размеров */
+}
+
+body {
+    background-image: url("../img/white-needle.png");
+    background-attachment: fixed; /* Параллакс эффект */
+    background-size: cover;
+    font-family: "Exo2-Medium", sans-serif;
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход при смене темы */
+}
+
+body.dark-theme {
+    background-color: #121212; /* Темная тема для тела */
+    color: #e0e0e0;
+}
+
+#block-body {
+    width: 1035px;
+    margin: 5px auto;
+    height: auto;
+    padding-top: 100px; /* Чтобы контент не заходил под шапку */
+}
+
+/* Стили шапки */
+header {
+    width: 100%;
+    max-width: 100%;
+    height: 80px;
+    background-color: black;
+    border-radius: 0 0 15px 15px; /* Закругленные края только внизу */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+    position: fixed; /* Фиксируем шапку наверху */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: height 0.3s, padding 0.3s; /* Плавное изменение размеров */
+}
+
+.compact-header {
+    height: 50px; /* Сжатая шапка */
+    padding: 0 15px; /* Уменьшенный отступ */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1; /* Плавное появление */
+    }
+}
+
+.logo {
+    flex: 1;
+    transition: font-size 0.3s; /* Плавное изменение размера шрифта */
+}
+
+.compact-logo .site-name {
+    font-size: 20px; /* Уменьшенный размер текста */
+}
+
+.logo a {
+    display: block;
+    text-decoration: none;
+}
+
+.site-name {
+    font-family: "Exo2-Bold", sans-serif;
+    font-size: 28px;
+    color: white; /* Белые буквы */
+}
+
+body.dark-theme .site-name {
+    color: #e0e0e0; /* Цвет для темной темы */
+}
+
+/* Стили для меню */
+.top-menu {
+    flex: 2;
+}
+
+.top-menu ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.top-menu ul li a {
+    text-decoration: none;
+    font-size: 17px;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 20px; /* Более закругленные кнопки */
+    background-color: #222; /* Цвет кнопки */
+    transition: all 0.3s; /* Плавные переходы */
+}
+
+body.dark-theme .top-menu ul li a {
+    color: #e0e0e0; /* Цвет текста для темной темы */
+    background-color: #333; /* Цвет кнопок для темной темы */
+}
+
+.top-menu ul li a:hover {
+    background-color: #00ADE4; /* При наведении */
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+}
+
+/* Переключатель темы */
+.theme-switch {
+    display: flex;
+    align-items: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #00ADE4;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Адаптация шапки для мобильных устройств */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        height: auto;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .top-menu ul {
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .top-menu ul li {
+        margin: 5px 0;
+    }
+
+    .top-menu ul li a {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .theme-switch {
+        margin-top: 10px;
+    }
+}
+
+/* Адаптация карточек новостей */
+@media (max-width: 768px) {
+    #main-news .news-container {
+        flex-direction: column;
+    }
+
+    .news-card {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Адаптация карточек игр */
+@media (max-width: 768px) {
+    #games-section .games-container {
+        flex-direction: column;
+    }
+
+    .game-card {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Адаптация кнопки новостей */
+@media (max-width: 768px) {
+    .sticky-news-button {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .sticky-news-button button {
+        padding: 8px 15px;
+    }
+}
+
+/* Оставшиеся стили остаются без изменений... */
+
+/* Секция "Главные новости" */
+#main-news {
+    max-width: 1035px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+}
+
+body.dark-theme #main-news {
+    background-color: #1e1e1e; /* Цвет фона для темной темы */
+}
+
+#main-news h2 {
+    font-family: "Exo2-Bold", sans-serif;
+    color: #222;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+body.dark-theme #main-news h2 {
+    color: #e0e0e0; /* Цвет заголовка для темной темы */
+}
+
+.news-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.news-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    width: 30%;
+    transition: transform 0.3s;
+}
+
+body.dark-theme .news-card {
+    background-color: #2a2a2a; /* Цвет карточек для темной темы */
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-card h3 {
+    font-family: "Exo2-Bold", sans-serif;
+    color: #333;
+}
+
+body.dark-theme .news-card h3 {
+    color: #e0e0e0; /* Цвет текста заголовка для темной темы */
+}
+
+.news-card p {
+    font-family: "Exo2-Medium", sans-serif;
+    color: #555;
+}
+
+body.dark-theme .news-card p {
+    color: #c0c0c0; /* Цвет текста для темной темы */
+}
+
+/* Раздел про игры */
+#games-section {
+    max-width: 1035px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme #games-section {
+    background-color: #2a2a2a; /* Цвет фона для темной темы */
+}
+
+#games-section h2 {
+    font-family: "Exo2-Bold", sans-serif;
+    color: #222;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+body.dark-theme #games-section h2 {
+    color: #e0e0e0; /* Цвет заголовка для темной темы */
+}
+
+.games-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.game-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    width: 30%;
+    transition: transform 0.3s;
+}
+
+body.dark-theme .game-card {
+    background-color: #2a2a2a; /* Цвет карточек для темной темы */
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+}
+
+.game-card h3 {
+    font-family: "Exo2-Bold", sans-serif;
+    color: #333;
+}
+
+body.dark-theme .game-card h3 {
+    color: #e0e0e0; /* Цвет текста заголовка для темной темы */
+}
+
+.game-card p {
+    font-family: "Exo2-Medium", sans-serif;
+    color: #555;
+}
+
+body.dark-theme .game-card p {
+    color: #c0c0c0; /* Цвет текста для темной темы */
+}
+
+/* Кнопка новостей */
+.sticky-news-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #00ADE4;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+.sticky-news-button:hover {
+    background-color: #007bb5;
+}
+
+/* Стили кнопок в шапке */
+button {
+    background-color: #00ADE4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: "Exo2-Medium", sans-serif;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #007bb5;
+    transform: scale(1.05);
+}
